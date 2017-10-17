@@ -1,0 +1,14 @@
+---
+- name: set up ssh on windows server
+  hosts: windows
+  become: true
+
+  tasks:
+    - include_vars: "{{ playbook_directory }}/ssh_var.yml"
+
+    - include_role:
+        name: "{{ item }}"
+      with_items:
+        - win_package_install
+        - win_service_manage
+        - win_firewall
