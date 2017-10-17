@@ -22,4 +22,4 @@
   register: nltest
 
 - debug:
-    var: nltest
+    var: nltest.stdout_lines
