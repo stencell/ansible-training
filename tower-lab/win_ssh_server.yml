@@ -7,8 +7,10 @@
     - include_vars: "{{ playbook_dir }}/ssh_var.yml"
 
     - include_role:
-        name: "{{ item }}"
-      with_items:
-        - win_package_install
-        - win_service_manage
-        - win_firewall
+        name: win_package_install
+
+    - include_role:
+        name: win_service_manage
+
+    - include_role:
+        name: win_firewall
