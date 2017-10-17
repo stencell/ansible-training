@@ -1,0 +1,12 @@
+---
+- name: add windows users to active directory
+  win_domain_user:
+    name: "{{ item.name }}"
+    firstname: "{{ item.firstname }}"
+    surname: "{{ item.surname }}"
+    password: "{{ item.password }}"
+    email: "{{ item.email }}"
+    state: present
+    enabled: true
+  with_items:
+    - "{{ user_info }}"

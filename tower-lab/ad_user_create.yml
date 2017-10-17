@@ -1,0 +1,10 @@
+---
+- name: add users to active directory
+  hosts: windows
+  become: true
+
+  tasks:
+    - include_vars: "{{ playbook_dir }}/user_info.yml"
+
+    - include_role:
+        name: win_ad_user
