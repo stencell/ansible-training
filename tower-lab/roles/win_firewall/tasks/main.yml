@@ -1,6 +1,6 @@
 ---
 - name: update windows firewall ingress
-  win_firewall:
+  win_firewall_rule:
     name: "{{ service_name }}"
     localport: "{{ local_port }}"
     protocol: "{{ protocol_name }}"
