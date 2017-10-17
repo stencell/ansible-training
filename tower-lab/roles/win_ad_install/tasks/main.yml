@@ -1,0 +1,26 @@
+---
+- name: install active directory service
+  win_feature:
+    name: AD-Domain-Services
+    state: installed
+
+- name: configure windows domain
+  win_domain:
+    dns_domain_name: ad.e842.example.opentlc.com
+    safe_mode_password: jVMijRwLbI02gFCo2xkjlZ9lxEA7bm7zgg==
+
+- name: reboot node to complete configuration
+  win_reboot:
+
+- name: wait for reboot to complete
+  wait_for:
+    port: 5986
+    delay: 30
+    host: "{{ ansible_ssh_host }}"
+
+- name: verify installation complete
+  win_shell: nltest /dclist:{{ ad_domain_name }}
+  register: nltest
+
+- debug:
+    msg: nltest

@@ -1,0 +1,10 @@
+---
+- name: install and configure active directory
+  hosts: windows
+  become: true
+
+  tasks:
+    - include: "{{ playbook_dir }}/my_ad_vars.yml"
+
+    - include_role:
+        name: win_ad_install
