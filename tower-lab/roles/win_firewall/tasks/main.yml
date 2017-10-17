@@ -6,4 +6,5 @@
     protocol: "{{ protocol_name }}"
     direction: in
     action: allow
+    state: present
   when: ansible_distribution == "Microsoft Windows Server 2012 R2 Standard"
