@@ -1,0 +1,19 @@
+---
+- name: install packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - haproxy
+    - httpie
+
+- name: enable haproxy
+  service:
+    name: haproxy
+    enabled: true
+
+- name: add haproxy configuration
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: haproxy-restart

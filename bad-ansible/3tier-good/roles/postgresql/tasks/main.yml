@@ -1,0 +1,23 @@
+---
+- name: install postgresql packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - postgresql-server
+
+- name: check for postgresql initialize
+  shell: cat /var/lib/pgsql/initdb.log
+  register: initdb
+  ignore_errors: true
+
+- name: initialize postgresql
+  # this should really be something fancier, but oh well...
+  shell: postgresql-setup initdb
+  when: initdb.stdout.find('Success') == -1
+
+- name: start and enable postgresql service
+  service:
+    name: postgresql
+    enabled: true
+    state: restarted

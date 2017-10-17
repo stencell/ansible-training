@@ -1,0 +1,25 @@
+---
+- name: install tomcat packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - tomcat
+
+- name: enable and start tomcat service
+  service:
+    name: tomcat
+    state: started
+    enabled: true
+
+- name: create tomcat directory
+  file:
+    path: /usr/share/tomcat/webapps/ansible
+    state: directory
+
+- name: copy index.html to app servers
+  template:
+    src: index.html.j2
+    dest: /usr/share/tomcat/webapps/ansible/index.html
+    mode: 0644
+  notify: restart-tomcat

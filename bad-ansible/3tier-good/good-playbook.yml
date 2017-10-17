@@ -1,0 +1,31 @@
+---
+- name: deploy repo configuration
+  hosts: all
+  become: true
+
+  tasks:
+    - name: copy repo file to hosts
+      copy:
+        src: ./open_three-tier-app.repo
+        dest: /etc/yum.repos.d/open_three-tier-app.repo
+
+- name: deploy frontends
+  hosts: frontends
+  become: true
+
+  roles:
+    - haproxy
+
+- name: deploy tomcat
+  hosts: apps
+  become: true
+
+  roles:
+    - tomcat
+
+- name: deploy postgresql
+  hosts: appdbs
+  become: true
+
+  roles:
+    - postgresql

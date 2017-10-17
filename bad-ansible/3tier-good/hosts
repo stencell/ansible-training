@@ -1,0 +1,33 @@
+[GenericExample:vars]
+
+###########################################################################
+### Ansible Vars
+###########################################################################
+timeout=60
+ansible_become=yes
+ansible_ssh_user=ec2-user
+
+
+[GenericExample:children]
+frontends
+apps
+appdbs
+support
+
+
+[frontends]
+## These are the frontends
+frontend1.61dc.internal ssh_host=ec2-34-236-12-181.compute-1.amazonaws.com
+
+[apps]
+## These are the apps
+app1.61dc.internal ssh_host=ec2-34-231-110-114.compute-1.amazonaws.com
+app2.61dc.internal ssh_host=ec2-34-204-174-86.compute-1.amazonaws.com
+
+[appdbs]
+## These are the appdbs
+appdb1.61dc.internal ssh_host=ec2-34-237-52-157.compute-1.amazonaws.com
+
+## These are the supporthosts
+[support]
+support1.61dc.internal ssh_hose=ec2-34-204-177-95.compute-1.amazonaws.com
