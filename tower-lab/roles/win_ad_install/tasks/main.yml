@@ -3,14 +3,18 @@
   win_feature:
     name: AD-Domain-Services
     state: installed
+    include_management_tools: yes
+    include_sub_features: yes
 
 - name: configure windows domain
   win_domain:
-    dns_domain_name: ad.e842.example.opentlc.com
-    safe_mode_password: jVMijRwLbI02gFCo2xkjlZ9lxEA7bm7zgg==
+    dns_domain_name: "{{ ad_domain_name }}"
+    safe_mode_password: "{{ ad_safe_mode_password }}"
+  register: ad_reboot
 
 - name: reboot node to complete configuration
   win_reboot:
+  when: ad_reboot.reboot_required
 
 - name: wait for reboot to complete
   wait_for:
@@ -23,4 +27,4 @@
   register: nltest
 
 - debug:
-    msg: nltest
+    var: nltest
