@@ -1,6 +1,7 @@
 ---
 - name: where am i
   hosts: all
+  gather_facts: false
 
   tasks:
     - shell: pwd
