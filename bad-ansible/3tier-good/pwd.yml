@@ -1,0 +1,10 @@
+---
+- name: where am i
+  hosts: all
+
+  tasks:
+    - shell: pwd
+      register: whereami
+
+    - debug:
+        var: whereami
