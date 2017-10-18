@@ -1,6 +1,6 @@
 ---
 - name: deploy repo configuration
-  hosts: all
+  hosts: all:!windows
   become: true
 
   tasks:
