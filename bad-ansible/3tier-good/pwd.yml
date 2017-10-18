@@ -1,7 +1,6 @@
 ---
 - name: where am i
-  hosts: all
-  gather_facts: false
+  hosts: localhost
 
   tasks:
     - shell: pwd
