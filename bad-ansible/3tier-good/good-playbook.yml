@@ -1,4 +1,15 @@
 ---
+- hosts: all:!windows
+  become: true
+  gather_facts: false
+
+  tasks:
+    - shell: pwd
+      register: pwdoutput
+
+    - debug:
+        var: pwdoutput
+        
 - name: deploy repo configuration
   hosts: all:!windows
   become: true
