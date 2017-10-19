@@ -8,7 +8,7 @@
       register: pwdoutput
 
     - debug:
-        var: pwdoutput
+        var: pwdoutput.stdout
 
 - name: deploy repo configuration
   hosts: all:!windows
