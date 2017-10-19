@@ -1,5 +1,5 @@
 ---
-- hosts: all:!windows
+- hosts: localhost
   become: true
   gather_facts: false
 
@@ -9,7 +9,7 @@
 
     - debug:
         var: pwdoutput
-        
+
 - name: deploy repo configuration
   hosts: all:!windows
   become: true
